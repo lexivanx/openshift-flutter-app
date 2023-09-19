@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build and Test') {
+            steps {
+                sh 'flutter build'
+                // Tests + security
+            }
+        }
+
+        stage('Build and Push Docker Images') {
+            steps {
+                sh 'docker build -t your-flutter-app-image:tag .'
+                sh 'docker build -t your-db-image:tag ./db'
+                // Push images to container registry
+            }
+        }
+
+        stage('Deploy to OpenShift') {
+            steps {
+                sh 'oc apply -f deployment-flutter-app.yaml'
+                sh 'oc apply -f deployment-db.yaml'
+            }
+        }
+    }
+}
