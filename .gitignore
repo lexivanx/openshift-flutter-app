@@ -13,5 +13,4 @@ flutter_app/.gitignore
 flutter_app/.metadata
 flutter_app/analysis_options.yaml
 flutter_app/pubspec.lock
-flutter_app/pubspec.yaml
 flutter_app/README.md
