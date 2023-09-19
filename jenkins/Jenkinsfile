@@ -1,33 +1,39 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                checkout scm
+                // Build your Flutter app here
+                sh 'flutter build web'
             }
         }
-
-        stage('Build and Test') {
+        
+        stage('OWASP ZAP Scan') {
             steps {
-                sh 'flutter build'
-                // Tests + security
+                // Configure ZAP proxy settings and perform scanning
+                sh 'zap-cli --quick-url flutter_app_url -c quick-scan' // Adjust with your ZAP commands
             }
         }
-
-        stage('Build and Push Docker Images') {
+        
+        stage('SonarQube Analysis') {
             steps {
-                sh 'docker build -t your-flutter-app-image:tag .'
-                sh 'docker build -t your-db-image:tag ./db'
-                // Push images to container registry
+                // Execute the sonar-scanner with your project properties
+                sh 'sonar-scanner -Dsonar.projectKey=flutter_app -Dsonar.projectName="Flutter App" -Dsonar.projectVersion=1.0'
             }
         }
-
-        stage('Deploy to OpenShift') {
+        
+        stage('Deploy') {
             steps {
-                sh 'oc apply -f deployment-flutter-app.yaml'
-                sh 'oc apply -f deployment-db.yaml'
+                // Deploy Flutter app to your target env
+                sh 'deploy-command-here' // Adjust with your deployment process
             }
+        }
+    }
+    
+    post {
+        always {
+            // Clean up and perform any post-build actions
         }
     }
 }
