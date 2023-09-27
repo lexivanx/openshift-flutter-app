@@ -1,9 +1,5 @@
-# openshift-flutter-app
+# Introduction
 Flutter app, containerized and deployed on OpenShift. CI/CD pipeline for testing, building images and triggering deployments on OpenShift.
-
-## Introduction
-
-Provide a brief introduction to the project, its purpose, and its key features.
 
 ## Prerequisites
 
@@ -90,7 +86,7 @@ The Jenkinsfile defines the CI/CD pipeline for the Flutter app. It automates the
 
 This Jenkinsfile defines an end-to-end CI/CD pipeline for the Flutter app, encompassing building, security scanning, code analysis, and deployment. Customize the commands and configurations to align with your specific project requirements.
 
-## Integrate OWASP ZAP:
+## Integrate OWASP ZAP
 
 OWASP ZAP is a security testing tool used to find vulnerabilities in web applications, including those built with Flutter. To integrate ZAP into your project, follow these steps:
 
@@ -104,7 +100,7 @@ OWASP ZAP is a security testing tool used to find vulnerabilities in web applica
 
 5. Security testing with OWASP ZAP is integrated into te CI/CD pipeline by running scans automatically as part of the build and deploy process.
 
-## Integrate SonarQube:
+## Integrate SonarQube
 
 SonarQube is a code quality and security analysis platform. It can help you identify code quality issues, security vulnerabilities, and technical debt in your Flutter app. Here's how to integrate SonarQube:
 
