@@ -10,8 +10,6 @@ Flutter app, containerized and deployed on OpenShift. CI/CD pipeline for testing
 
 ## Getting Started
 
-Explain how to set up and run the project. Provide step-by-step instructions for each component.
-
 ### Flutter App
 
 Clone the repository and get Flutter dependencies `flutter pub get`. You can test the app with `flutter run`.
