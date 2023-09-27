@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: db
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -11,6 +11,22 @@ spec:
     spec:
       containers:
       - name: db-container
-        image: your-db-image:tag
+        image: db-image:tag
         ports:
         - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: my_database
+        - name: POSTGRES_USER
+          value: db_username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: postgres-password
+        volumeMounts:
+        - name: data-volume
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: data-volume
+        emptyDir: {}
